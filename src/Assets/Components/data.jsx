@@ -10,9 +10,14 @@ const Power = () => {
     longitude: '',
     resolution: 'hourly',
   });
-  const refSearchInput = useRef(null);
 
-  console.log(data);
+  const [dataReceived, setDataReceived] = useState({
+    data: [],
+  });
+
+  console.log(dataReceived);
+
+  const refSearchInput = useRef(null);
 
   const handlePos = (e) => {
     e.preventDefault();
@@ -29,6 +34,13 @@ const Power = () => {
       alert("We can't access to your location");
     }
   };
+
+  const URL = `https://spaceappssunshineback.azurewebsites.net/api/nasa/?start=${data.start.replaceAll(
+    '-',
+    ''
+  )}&end=${data.end.replaceAll('-', '')}&latitude=${data.latitude}&longitude=${
+    data.longitude
+  }&resolution=${data.resolution}`;
 
   const handleCity = async (e) => {
     e.preventDefault();
@@ -66,15 +78,11 @@ const Power = () => {
 
     const postData = async () => {
       try {
-        const { dataSunshine } = await axios.get(
-          `https://add8-181-26-3-11.ngrok.io/api/nasa/?start=${data.start.replaceAll(
-            '-',
-            ''
-          )}&end=${data.end.replaceAll('-', '')}&latitude=${
-            data.latitude
-          }&longitude=${data.longitude}&resolution=${data.resolution}`
-        );
-        console.log(dataSunshine);
+        const { data } = await axios.get(URL);
+        // console.log(dataSunshine);
+        // var dataParse = JSON.parse(dataSunshine);
+        // setDataReceived(dataSun);
+        console.log(data);
       } catch (error) {
         console.log('err', error);
       }
