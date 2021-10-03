@@ -1,6 +1,7 @@
-import { Bar, Line, Doughnut } from 'react-chartjs-2';
+import { Bar, Line, Doughnut } from 'react-chartjs-2'
+import './index.css'
 
-function GraphicBar({graphic_data, height = "100%", width = "100%"}) {
+function GraphicBar({graphic_data, height = "auto", width = "auto"}) {
     // Example of graphic
     // return <Bar data={{
     //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
@@ -27,21 +28,30 @@ function GraphicBar({graphic_data, height = "100%", width = "100%"}) {
     //     }]
     // }} height="100%" width="100%" />
 
-    return <div height={height} width={width}>
-        <Bar data={graphic_data} />
+    return <div style={{
+        width,
+        height
+    }}>
+        <Bar data={graphic_data} className="graphic" options={{ maintainAspectRatio: false }} />
     </div>
 }
 
 export default GraphicBar
 
-export function GraphicDoughnut({graphic_data, height = "10px", width = "10px"}) {
-    return <div height={height} width={width}>
-        <Doughnut data={graphic_data} />
+export function GraphicDoughnut({graphic_data, height = "auto", width = "auto"}) {
+    return <div style={{
+        width,
+        height
+    }}>
+        <Doughnut data={graphic_data} className="graphic" options={{ maintainAspectRatio: false }} />
     </div>
 }
 
-export function GraphicLine({graphic_data, height = "10px", width = "10px"}) {
-    return <div height={height} width={width}>
-        <Line data={graphic_data} />
+export function GraphicLine({graphic_data, height = "auto", width = "auto"}) {
+    return <div style={{
+        width,
+        height
+    }}>
+        <Line data={graphic_data} className="graphic" options={{ maintainAspectRatio: false }} />
     </div>
 }
