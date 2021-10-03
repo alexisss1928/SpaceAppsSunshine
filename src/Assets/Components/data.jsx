@@ -82,8 +82,8 @@ const Power = () => {
         const { data } = await axios.get(URL);
         // console.log(dataSunshine);
         // var dataParse = JSON.parse(dataSunshine);
-        // setDataReceived(dataSun);
-        console.log(data);
+        setDataReceived(data);
+        // console.log(data);
       } catch (error) {
         console.log('err', error);
       }
