@@ -8,6 +8,7 @@ const Power = () => {
     end: '',
     latitude: '',
     longitude: '',
+    city: '',
     resolution: 'hourly',
   });
   const refSearchInput = useRef(null);
@@ -118,7 +119,7 @@ const Power = () => {
             type="search"
             name="resolution"
             id="resolution"
-            value={data.city}
+            value={data.resolution}
             onChange={handleChange}
           >
             <option value="hourly">Hourly</option>
@@ -137,6 +138,7 @@ const Power = () => {
             id="city"
             ref={refSearchInput}
             value={data.city}
+            onChange={handleChange}
           />
           <button onClick={handleCity}>Get coordenates</button>
         </div>
