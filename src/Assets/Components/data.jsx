@@ -37,34 +37,19 @@ const Power = () => {
       .replaceAll(',', ' ')
       .replaceAll(/ +/g, '+');
 
-    try {
-      const { data } = await axios.get(
-        'https://nominatim.openstreetmap.org/?addressdetails=1&q=' +
-          searchString +
-          '+fe&format=json&limit=1'
-      );
-      setData({
-        ...data,
-        latitude: data[0].lat,
-        longitude: data[0].lon,
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
-    /* fetch(
+    fetch(
       'https://nominatim.openstreetmap.org/?addressdetails=1&q=' +
         searchString +
         '+fe&format=json&limit=1'
     )
       .then((result) => result.json())
-      .then((data) => {
+      .then((datar) => {
         setData({
           ...data,
-          latitude: data[0].lat,
-          longitude: data[0].lon,
+          latitude: datar[0].lat,
+          longitude: datar[0].lon,
         });
-      }); */
+      });
   };
 
   const handleChange = (event) => {
