@@ -1,6 +1,10 @@
+import Form from './molecules/Form';
 import Graphic, { GraphicDoughnut, GraphicLine } from './molecules/Graphic'
+import { useState } from 'react'
 
 function App() {
+  const [ onForm, setOnForm ] = useState(true)
+
   const data = {
     labels: ['January',
     'February',
@@ -16,7 +20,9 @@ function App() {
     }]
   }
 
-  return <GraphicLine graphic_data={data} width="500px" />
+  return onForm ?
+    <Form setOnForm={setOnForm} /> :
+    <GraphicLine graphic_data={data} width="500px" />
 }
 
 export default App

@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import './data.css';
+import './index.css';
 
-const Power = () => {
+function Form({setOnForm}) {
   const [data, setData] = useState({
     start: '',
     end: '',
@@ -80,10 +80,10 @@ const Power = () => {
     const postData = async () => {
       try {
         const { data } = await axios.get(URL);
-        // console.log(dataSunshine);
-        // var dataParse = JSON.parse(dataSunshine);
+        
         setDataReceived(data);
-        // console.log(data);
+
+        setOnForm(false)
       } catch (error) {
         console.log('err', error);
       }
@@ -161,4 +161,4 @@ const Power = () => {
   );
 };
 
-export default Power;
+export default Form;
