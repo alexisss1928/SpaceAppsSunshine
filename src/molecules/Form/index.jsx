@@ -1,9 +1,8 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import Graphic from '../../molecules/Graphic';
-import './data.css';
 
-const Power = () => {
+function Form({ setOnForm }) {
   const [data, setData] = useState({
     start: '',
     end: '',
@@ -42,7 +41,7 @@ const Power = () => {
     ''
   )}&end=${data.end.replaceAll('-', '')}&latitude=${data.latitude}&longitude=${
     data.longitude
-  }&resolution=${data.resolution}`;
+  }&resolution=${data.resolution}&comunity=SB`;
 
   const handleCity = async (e) => {
     e.preventDefault();
@@ -81,10 +80,10 @@ const Power = () => {
     const postData = async () => {
       try {
         const { data } = await axios.get(URL);
-        // console.log(dataSunshine);
-        // var dataParse = JSON.parse(dataSunshine);
+
         setDataReceived(data);
-        // console.log(data);
+
+        setOnForm(false);
       } catch (error) {
         console.log('err', error);
       }
@@ -93,8 +92,8 @@ const Power = () => {
   }
   return (
     <div>
+      <h2 className="title">You are my sunshine</h2>
       <form>
-        <h2>Sign in to your account</h2>
         <div>
           <label htmlFor="start">Start Date</label>
           <br />
@@ -149,25 +148,25 @@ const Power = () => {
             value={data.city}
             onChange={handleChange}
           />
-          <button onClick={handleCity}>Get coordenates</button>
         </div>
-        <div>
+        <div className="coordinates">
+          <button onClick={handleCity}>Get coordenates</button>
           <button onClick={handlePos}>Get current position</button>
         </div>
-        <div>
+        <div className="getData">
           <button onClick={handleSubmit}>Get data</button>
         </div>
       </form>
 
-      {dataReceived && (
+      {/*  {dataReceived && (
         <Graphic
           graphic_data={dataReceived}
           values_units={dataReceived}
           labels={dataReceived}
         />
-      )}
+      )} */}
     </div>
   );
-};
+}
 
-export default Power;
+export default Form;
