@@ -4,6 +4,9 @@ import { useState } from 'react'
 
 function App() {
   const [ onForm, setOnForm ] = useState(true)
+  const [ graphicData, setGraphicData ] = useState({})
+
+  console.log(graphicData)
 
   const data = {
     labels: ['January',
@@ -21,7 +24,7 @@ function App() {
   }
 
   return onForm ?
-    <Form setOnForm={setOnForm} /> :
+    <Form setOnForm={setOnForm} setGraphicData={setGraphicData} /> :
     <GraphicLine graphic_data={data} width="500px" />
 }
 
