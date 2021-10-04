@@ -1,8 +1,15 @@
 import React, { useState, useRef } from 'react';
+<<<<<<< HEAD
 import axios from 'axios';
 import Graphic from '../../molecules/Graphic';
 
 function Form({ setOnForm }) {
+=======
+import { getGraphicData } from '../../Request'
+import './index.css';
+
+function Form({setOnForm, setGraphicData}) {
+>>>>>>> 7511a77a79a4a9fc7969abf6d1c9d3b15fefe8ae
   const [data, setData] = useState({
     start: '',
     end: '',
@@ -11,12 +18,6 @@ function Form({ setOnForm }) {
     city: '',
     resolution: 'hourly',
   });
-
-  const [dataReceived, setDataReceived] = useState({
-    data: [],
-  });
-
-  console.log(dataReceived);
 
   const refSearchInput = useRef(null);
 
@@ -36,6 +37,7 @@ function Form({ setOnForm }) {
     }
   };
 
+<<<<<<< HEAD
   const URL = `https://spaceappssunshineback.azurewebsites.net/api/nasa/?start=${data.start.replaceAll(
     '-',
     ''
@@ -43,6 +45,8 @@ function Form({ setOnForm }) {
     data.longitude
   }&resolution=${data.resolution}&comunity=SB`;
 
+=======
+>>>>>>> 7511a77a79a4a9fc7969abf6d1c9d3b15fefe8ae
   const handleCity = async (e) => {
     e.preventDefault();
 
@@ -79,9 +83,15 @@ function Form({ setOnForm }) {
 
     const postData = async () => {
       try {
+<<<<<<< HEAD
         const { data } = await axios.get(URL);
 
         setDataReceived(data);
+=======
+        const graphic_data = await getGraphicData(data);
+
+        setGraphicData(graphic_data);
+>>>>>>> 7511a77a79a4a9fc7969abf6d1c9d3b15fefe8ae
 
         setOnForm(false);
       } catch (error) {
