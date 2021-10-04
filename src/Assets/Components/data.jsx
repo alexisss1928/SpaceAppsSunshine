@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import Graphic from '../../molecules/Graphic';
 import './data.css';
 
 const Power = () => {
@@ -157,6 +158,14 @@ const Power = () => {
           <button onClick={handleSubmit}>Get data</button>
         </div>
       </form>
+
+      {dataReceived && (
+        <Graphic
+          graphic_data={dataReceived}
+          values_units={dataReceived}
+          labels={dataReceived}
+        />
+      )}
     </div>
   );
 };
