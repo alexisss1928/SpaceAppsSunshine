@@ -5,27 +5,35 @@ import './App.css';
 
 function App() {
   const [onForm, setOnForm] = useState(true);
-  const [graphicData, setGraphicData] = useState({});
+  const [graphicData, setGraphicData] = useState(null);
+  const [graphicTime, setGraphicTime] = useState({start: '', end: ''});
 
-  const data = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June'],
-    datasets: [
-      {
-        label: 'My First dataset',
-        data: [0, 10, 5, 2, 20, 30, 45],
-        backgroundColor: 'rgb(255, 99, 132)',
-        borderColor: 'rgb(255, 99, 132)',
-      },
-    ],
-  };
+  let graphic_label = 'loading'
+  let graphic_data
+  let graphic_labels
+
+  if(graphicData){
+    const data_key = Object.keys(graphicData['array'][0]['data'][0])
+
+    graphic_label = graphicData['array'][0]['data'][0][data_key]['title']
+    graphic_data = graphicData['array'][0]['data'][0][data_key]['values']
+
+    graphic_labels = [graphicTime.start.replaceAll('-', '/')]
+
+    for(let i = 0; graphic_data.length - 2 > i; i++) {
+      graphic_labels.push(' ')
+    }
+
+    graphic_labels.push(graphicTime.end.replaceAll('-', '/'))
+  }
 
   return onForm ? (
-    <Form setOnForm={setOnForm} setGraphicData={setGraphicData} />
+    <Form setOnForm={setOnForm} setGraphicData={setGraphicData} setGraphicTime={setGraphicTime} />
   ) : (
     <Graphic
-      graphic_data={data.datasets[0].data}
-      labels={data.labels}
-      values_units={data.datasets[0].label}
+      graphic_data={graphic_data}
+      labels={graphic_labels}
+      values_units={graphic_label}
     />
   );
 }

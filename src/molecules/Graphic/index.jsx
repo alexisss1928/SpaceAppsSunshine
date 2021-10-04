@@ -7,7 +7,7 @@ function GraphicBar({ graphic_data, labels, values_units }) {
       <h2 className="title">You are my sunshine</h2>
       <Line
         data={{
-          labels: graphic_data,
+          labels,
           datasets: [
             {
               label: values_units,

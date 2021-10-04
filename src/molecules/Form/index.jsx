@@ -1,8 +1,8 @@
 import React, { useState, useRef } from 'react';
-import axios from 'axios';
 import './index.css';
-
-function Form({ setOnForm, setGraphicData }) {
+import { getGraphicData } from '../../Request'
+ 
+function Form({ setOnForm, setGraphicData, setGraphicTime }) {
   const [data, setData] = useState({
     start: '',
     end: '',
@@ -11,6 +11,9 @@ function Form({ setOnForm, setGraphicData }) {
     city: '',
     resolution: 'hourly',
   });
+
+  
+  console.log(data.start, data.end)
 
   const refSearchInput = useRef(null);
 
@@ -28,14 +31,7 @@ function Form({ setOnForm, setGraphicData }) {
     } else {
       alert("We can't access to your location");
     }
-  };
-
-  const URL = `https://spaceappssunshineback.azurewebsites.net/api/nasa/?start=${data.start.replaceAll(
-    '-',
-    ''
-  )}&end=${data.end.replaceAll('-', '')}&latitude=${data.latitude}&longitude=${
-    data.longitude
-  }&resolution=${data.resolution}&comunity=SB`;
+  }
 
   const handleCity = async (e) => {
     e.preventDefault();
@@ -73,17 +69,24 @@ function Form({ setOnForm, setGraphicData }) {
 
     const postData = async () => {
       try {
-        const { data } = await axios.get(URL);
+        const graphic_data = await getGraphicData(data)
 
-        setGraphicData(data);
+        setGraphicData(graphic_data);
 
         setOnForm(false);
+
+        setGraphicTime({
+          start: data.start,
+          end: data.end
+        })
       } catch (error) {
         console.log('err', error);
       }
     };
+
     postData();
   }
+
   return (
     <div>
       <h2 className="title">You are my sunshine</h2>
